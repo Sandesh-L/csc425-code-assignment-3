@@ -8,19 +8,22 @@
 
 int main(int argc, char *argv[]){
 
- FILE *f = open("./random_file.txt", O_RDWR);
+ int f = open("./random_file.txt", O_RDWR);
 
  int rc = fork();
 
  if (rc == 0){
-    
-    printf("message from the child: my file is \n", f);
+
+    printf("message from the child: my file is %d \n", f);
 
  }else{
     wait(NULL);
-    printf("message from the parent: my file is \n", f);
+    printf("message from the parent: my file is %d \n", f);
 
+ }
 }
 
-
-}
+/*
+Both the child and the parent have access to the file. In the case where they are both writing to the file,
+they would most likely write over eachother.
+*/
